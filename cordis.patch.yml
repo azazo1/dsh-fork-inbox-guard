@@ -1,0 +1,6 @@
+# dsh-fork-inbox-guard bundle patch: mount the Host-side guard. `name` is the
+# package name, resolved through the profile's node_modules. The plugin is
+# host-only (no client half).
+- insert:
+    - id: dsh-fork-inbox-guard
+      name: dsh-fork-inbox-guard

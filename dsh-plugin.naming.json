@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "policy": "dsh-plugin-naming/v1",
+  "plugin": {
+    "namespace": "azazo1",
+    "name": "fork-inbox-guard",
+    "coordinate": "azazo1/fork-inbox-guard",
+    "packageName": "dsh-fork-inbox-guard"
+  },
+  "names": {
+    "pluginNames": ["dsh-fork-inbox-guard"],
+    "loaderIds": ["dsh-fork-inbox-guard"],
+    "services": [],
+    "tools": [],
+    "commands": [],
+    "skills": [],
+    "skillProviders": [],
+    "events": [],
+    "settingsNamespaces": [],
+    "routes": []
+  }
+}

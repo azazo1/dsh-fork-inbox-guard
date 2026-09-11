@@ -1,0 +1,7 @@
+packages:
+  - .
+
+autoInstallPeers: false
+
+minimumReleaseAgeExclude:
+  - '@deepseek-ai/*'
