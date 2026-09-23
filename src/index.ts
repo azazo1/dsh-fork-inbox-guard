@@ -23,7 +23,7 @@ import type { Context } from '@deepseek-ai/cordis'
 export const name = 'dsh-fork-inbox-guard'
 
 export function apply(ctx: Context): void {
-  ctx.on('agent/session-start', (payload: { agent: Agent; source: SessionStartSource }) => {
+  ctx.on('agent/created', async (payload: { agent: Agent; source: SessionStartSource }) => {
     if (!inheritedPendingInput(payload.agent, payload.source)) return
     payload.agent.inbox.clear()
     ctx.logger.info(
