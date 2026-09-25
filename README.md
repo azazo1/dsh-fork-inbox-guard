@@ -16,7 +16,7 @@ Fork 用源会话日志的一段前缀给子会话做 seed. 切点从边界的 `
 
 ## 做法
 
-插件在 `agent/session-start` 上判断: 这次启动是不是 `startup` (即 `agents.create()`, fork 的两条路径都走它), 会话头是不是带 seed (`isSeeded`), 以及 inbox 里是不是真有待领消息. 三条都成立才调一次 `inbox.clear()`, 并记一行 info 日志.
+插件在 `agent/created` 上判断: 这次启动是不是 `startup` (即 `agents.create()`, fork 的两条路径都走它), 会话头是不是带 seed (`isSeeded`), 以及 inbox 里是不是真有待领消息. 三条都成立才调一次 `inbox.clear()`, 并记一行 info 日志.
 
 - 没有待领消息时不写任何事件, 是真正的空操作.
 - 有待领消息时会写一条带 `outcome: 'canceled'` 的 `agent/inbox/spliced`, 子会话日志里留下"继承了但已作废"的记录, 而不是无声抹掉.
@@ -57,5 +57,5 @@ fork-inbox-guard: dropped the pending inbox of seeded session "session-xxxx"
 
 - 只对新建的子会话生效, 不会反向修好已经建坏的历史会话.
 - 不改 fork 的切点算法, 所以子会话日志里仍会先出现源会话那条 insert, 紧跟一条 canceled 的 splice.
-- 依赖 `agent/session-start` 的 `source` 取值, `Agent.inbox` 和 `SessionHeader.isSeeded`. Harness 的公开 API 在 1.0 之前不保证稳定, 升级 dsh 后请重跑 `just test`.
+- 依赖 `agent/created` 的 `source` 取值, `Agent.inbox` 和 `SessionHeader.isSeeded`. Harness 的公开 API 在 1.0 之前不保证稳定, 升级 dsh 后请重跑 `just test`.
 - 上游若在 fork 里直接清空子会话 inbox, 本插件会因为 inbox 已空而什么都不做, 不会与之冲突.
